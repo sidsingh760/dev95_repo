@@ -10,12 +10,16 @@ var server = app.listen(8081, function () {
    console.log("Example app listening at http://%s:%s", host, port)
 
 })
+
+//show all
 app.get('/listUsers', function (req, res) {
    fs.readFile("user.json", 'utf8', function (err, data) {
        console.log( data );
        res.end( data );
    });
 })
+
+//insert
 var user = {
    "user4" : {
        "name" : "mohit",
@@ -33,6 +37,8 @@ app.post('/addUser', function (req, res) {
        res.end( JSON.stringify(data));
    });
 })
+
+//show particular
 app.get('/:id', function (req, res) {
    // First read existing users.
    fs.readFile( __dirname + "/" + "user.json", 'utf8', function (err, data) {
@@ -44,8 +50,9 @@ app.get('/:id', function (req, res) {
 })
 var id = 2;
 
-app.delete('/:id', function (req, res) {
 
+//delete
+app.delete('/:id', function (req, res) {
    // First read existing users.
    fs.readFile( __dirname + "/" + "user.json", 'utf8', function (err, data) {
        data = JSON.parse( data );
